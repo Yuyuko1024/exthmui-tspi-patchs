@@ -1,0 +1,52 @@
+From 29542733ea8b532616750a81988f7426d02a976a Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Fri, 2 Aug 2024 11:05:52 +0800
+Subject: [PATCH] Add default input method configure
+
+ * Set default ime strings to device's overlay by
+ `def_active_input_method` and `def_enabled_input_methods`
+
+Change-Id: I649c14a97500c0e53339940400a16c0409472793
+---
+ packages/SettingsProvider/res/values/defaults.xml         | 5 +++++
+ .../com/android/providers/settings/DatabaseHelper.java    | 8 ++++++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/packages/SettingsProvider/res/values/defaults.xml b/packages/SettingsProvider/res/values/defaults.xml
+index 76331216e3ff..ad46221ff3bf 100755
+--- a/packages/SettingsProvider/res/values/defaults.xml
++++ b/packages/SettingsProvider/res/values/defaults.xml
+@@ -54,6 +54,11 @@
+     <bool name="def_backup_enabled">false</bool>
+     <string name="def_backup_transport" translatable="false">com.android.localtransport/.LocalTransport</string>
+ 
++    <!-- 设置默认激活输入法 -->
++    <string name="def_active_input_method" translatable="false"></string>
++    <!-- 设置默认输入法 -->
++    <string name="def_enabled_input_methods" translatable="false"></string>
++
+     <!-- Default value for whether or not to pulse the notification LED when there is a
+          pending notification -->
+     <bool name="def_notification_pulse">true</bool>
+diff --git a/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java b/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+index 0a224ea61572..487a84541636 100644
+--- a/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
++++ b/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+@@ -2351,6 +2351,14 @@ class DatabaseHelper extends SQLiteOpenHelper {
+             loadBooleanSetting(stmt, Settings.Secure.ACCESSIBILITY_SPEAK_PASSWORD,
+                     R.bool.def_accessibility_speak_password);
+ 
++            //Yuyuko1024 added ## Add default enabled IME
++            loadStringSetting(stmt, Settings.Secure.ENABLED_INPUT_METHODS,
++                    R.string.def_enabled_input_methods);
++
++            //Yuyuko1024 added ## Add default IME
++            loadStringSetting(stmt, Settings.Secure.DEFAULT_INPUT_METHOD,
++                    R.string.def_active_input_method);
++
+             if (SystemProperties.getBoolean("ro.lockscreen.disable.default", false) == true) {
+                 loadSetting(stmt, Settings.System.LOCKSCREEN_DISABLED, "1");
+             } else {
+-- 
+2.34.1
+

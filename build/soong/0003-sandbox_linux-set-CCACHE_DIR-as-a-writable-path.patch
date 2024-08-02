@@ -1,0 +1,34 @@
+From 60e8d2e7a617b99b6644cbee9d8291571c6c36bd Mon Sep 17 00:00:00 2001
+From: daniml3 <danimoral1001@gmail.com>
+Date: Sun, 28 Apr 2024 12:37:10 +0800
+Subject: [PATCH 3/3] sandbox_linux: set CCACHE_DIR as a writable path
+
+Fixes "Read-only file system" error when using ccache.
+
+NOTE: This is only required when both ccache exec and dir are on the
+same partition.
+---
+ ui/build/sandbox_linux.go | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/ui/build/sandbox_linux.go b/ui/build/sandbox_linux.go
+index 2de772b00..3ab53de9d 100644
+--- a/ui/build/sandbox_linux.go
++++ b/ui/build/sandbox_linux.go
+@@ -165,6 +165,13 @@ func (c *Cmd) wrapSandbox() {
+ 		sandboxArgs = append(sandboxArgs, "-N")
+ 	}
+ 
++	if ccacheExec := os.Getenv("CCACHE_EXEC"); ccacheExec != "" {
++		bytes, err := exec.Command(ccacheExec, "-k", "cache_dir").Output()
++		if err == nil {
++			sandboxArgs = append(sandboxArgs, "-B", strings.TrimSpace(string(bytes)))
++		}
++	}
++
+ 	// Stop nsjail from parsing arguments
+ 	sandboxArgs = append(sandboxArgs, "--")
+ 
+-- 
+2.34.1
+

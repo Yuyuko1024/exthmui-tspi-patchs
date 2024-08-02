@@ -1,0 +1,29 @@
+From 95b861a1aac0cd55f37d1dcfbd321d91adb28b00 Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Fri, 2 Aug 2024 10:48:19 +0800
+Subject: [PATCH 6/6] core: Add packages exclude list support
+
+ * Ref:https://blog.csdn.net/yxdspirit/article/details/106903617
+ * Add `TARGET_REMOVE_PACKAGES :=` to exclude custom packages
+
+Change-Id: I913513e8fd5d8dea85b2e13de87cd4220356f988
+---
+ core/main.mk | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/core/main.mk b/core/main.mk
+index 48d1ee10fa..ac171bcf8b 100644
+--- a/core/main.mk
++++ b/core/main.mk
+@@ -1081,6 +1081,8 @@ define product-installed-files
+   $(eval ### Filter out the overridden packages and executables before doing expansion) \
+   $(eval _pif_overrides := $(call module-overrides,$(_pif_modules))) \
+   $(eval _pif_modules := $(filter-out $(_pif_overrides), $(_pif_modules))) \
++  $(eval ### remove custom package,Add by Seaton) \
++  $(eval _pif_modules := $(filter-out $(TARGET_REMOVE_PACKAGES), $(_pif_modules))) \
+   $(eval ### Resolve the :32 :64 module name) \
+   $(eval _pif_modules_32 := $(patsubst %:32,%,$(filter %:32, $(_pif_modules)))) \
+   $(eval _pif_modules_64 := $(patsubst %:64,%,$(filter %:64, $(_pif_modules)))) \
+-- 
+2.34.1
+

@@ -1,0 +1,27 @@
+From a1d0a7244a74e636f7c2e6f96b4e7e3d9e225ed6 Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Thu, 1 Aug 2024 20:53:17 +0800
+Subject: [PATCH 2/6] rk356x_tspi: Initialize exTHmUI Build
+
+Change-Id: Ia7b205f4689e7af6fee29feefb067b1d1c2fb91e
+---
+ rk3566_tspi/rk3566_tspi.mk | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/rk3566_tspi/rk3566_tspi.mk b/rk3566_tspi/rk3566_tspi.mk
+index c14c1fb..7fa9c6d 100755
+--- a/rk3566_tspi/rk3566_tspi.mk
++++ b/rk3566_tspi/rk3566_tspi.mk
+@@ -26,6 +26,9 @@ $(call inherit-product, device/rockchip/rk356x/device.mk)
+ $(call inherit-product, device/rockchip/common/device.mk)
+ $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+ 
++# Initialize exTHmUI Build
++$(call inherit-product-if-exists, vendor/exthmui-tspi/configs/tablet-wifi.mk)
++
+ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/../overlay
+ 
+ PRODUCT_CHARACTERISTICS := tablet
+-- 
+2.34.1
+

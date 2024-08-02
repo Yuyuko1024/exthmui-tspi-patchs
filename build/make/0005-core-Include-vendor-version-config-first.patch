@@ -1,0 +1,28 @@
+From a3733cf6acaa134ab125aa484d1b573aa59660fb Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Thu, 1 Aug 2024 21:45:13 +0800
+Subject: [PATCH 5/6] core: Include vendor version config first
+
+Change-Id: I58679ed885c7123c4a0df23518aa4720ebab06da
+---
+ core/main.mk | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/core/main.mk b/core/main.mk
+index 85b5841a9b..48d1ee10fa 100644
+--- a/core/main.mk
++++ b/core/main.mk
+@@ -373,6 +373,10 @@ BUILD_WITHOUT_PV := true
+ 
+ ADDITIONAL_BUILD_PROPERTIES += net.bt.name=Android
+ 
++# ------------------------------------------------------------
++# Include vendor specific additions to build properties
++-include vendor/exthmui-tspi/build/main.mk
++
+ # ------------------------------------------------------------
+ # Define a function that, given a list of module tags, returns
+ # non-empty if that module should be installed in /system.
+-- 
+2.34.1
+

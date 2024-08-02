@@ -1,0 +1,34 @@
+From bb3ac8410c73b6c0d111f310e4809a6f368ce14d Mon Sep 17 00:00:00 2001
+From: LuK1337 <priv.luk@gmail.com>
+Date: Sun, 28 Apr 2024 12:29:12 +0800
+Subject: [PATCH 3/6] releasetools: Fix fstab path detection when input_file is
+ a path to zip
+
+If _FindAndLoadRecoveryFstab() is called with a path to target files zip
+file, then it'll always attempt to read the fallback recovery.fstab
+path. By making sure to pass zipfile.ZipFile(), it'll be able to read
+the zip file ToC and use the correct path instead.
+---
+ tools/releasetools/common.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/tools/releasetools/common.py b/tools/releasetools/common.py
+index 7ad8321ff9..2e05d7ec61 100644
+--- a/tools/releasetools/common.py
++++ b/tools/releasetools/common.py
+@@ -685,7 +685,11 @@ def LoadInfoDict(input_file, repacking=False):
+     makeint(b.replace(".img","_size"))
+ 
+   # Load recovery fstab if applicable.
+-  d["fstab"] = _FindAndLoadRecoveryFstab(d, input_file, read_helper)
++  if isinstance(input_file, str) and zipfile.is_zipfile(input_file):
++    with zipfile.ZipFile(input_file, 'r', allowZip64=True) as input_zip:
++      d["fstab"] = _FindAndLoadRecoveryFstab(d, input_zip, read_helper)
++  else:
++    d["fstab"] = _FindAndLoadRecoveryFstab(d, input_file, read_helper)
+ 
+   # Tries to load the build props for all partitions with care_map, including
+   # system and vendor.
+-- 
+2.34.1
+
