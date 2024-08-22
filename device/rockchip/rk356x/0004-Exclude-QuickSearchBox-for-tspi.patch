@@ -1,0 +1,39 @@
+From 0d2a455b286d0db6eda42b56c3680e4107dcb6be Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Fri, 2 Aug 2024 10:58:51 +0800
+Subject: [PATCH 4/7] Exclude QuickSearchBox for tspi
+
+Change-Id: I630731904818e47e7c6f97c0c073f6be4d8535bc
+---
+ rk3566_tspi/rk3566_tspi.mk | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/rk3566_tspi/rk3566_tspi.mk b/rk3566_tspi/rk3566_tspi.mk
+index 0204422..55f245b 100755
+--- a/rk3566_tspi/rk3566_tspi.mk
++++ b/rk3566_tspi/rk3566_tspi.mk
+@@ -26,9 +26,6 @@ $(call inherit-product, device/rockchip/rk356x/device.mk)
+ $(call inherit-product, device/rockchip/common/device.mk)
+ $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+ 
+-# Initialize exTHmUI Build
+-$(call inherit-product-if-exists, vendor/exthmui-tspi/configs/tablet-wifi.mk)
+-
+ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/../overlay
+ 
+ PRODUCT_CHARACTERISTICS := tablet
+@@ -50,6 +47,10 @@ PRODUCT_PROPERTY_OVERRIDES += persist.bt.power.down=true
+ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.hdmirotationlock=true
+ PRODUCT_PROPERTY_OVERRIDES += persist.sys.timezone=Asia/Shanghai
+ 
++# Exclude packages list
++TARGET_REMOVE_PACKAGES := \
++    QuickSearchBox
++
+ # Prebuilts system apk
+ PRODUCT_PACKAGES += \
+-	ViaBrowser
++    ViaBrowser
+-- 
+2.34.1
+

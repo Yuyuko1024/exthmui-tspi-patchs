@@ -1,0 +1,27 @@
+From 4b7ccf0bf130bc4bec59ada1cb6985414783740a Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Fri, 2 Aug 2024 13:24:43 +0800
+Subject: [PATCH 7/7] rk3566_tspi: Build device self overlay
+
+Change-Id: I56a68d665d863e318c9553e9751da85e177f1c73
+---
+ rk3566_tspi/rk3566_tspi.mk | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/rk3566_tspi/rk3566_tspi.mk b/rk3566_tspi/rk3566_tspi.mk
+index 55f245b..12d1cf5 100755
+--- a/rk3566_tspi/rk3566_tspi.mk
++++ b/rk3566_tspi/rk3566_tspi.mk
+@@ -47,6 +47,9 @@ PRODUCT_PROPERTY_OVERRIDES += persist.bt.power.down=true
+ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.hdmirotationlock=true
+ PRODUCT_PROPERTY_OVERRIDES += persist.sys.timezone=Asia/Shanghai
+ 
++# Build device overlay
++DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
++
+ # Exclude packages list
+ TARGET_REMOVE_PACKAGES := \
+     QuickSearchBox
+-- 
+2.34.1
+
