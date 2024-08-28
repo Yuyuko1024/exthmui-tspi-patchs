@@ -1,0 +1,73 @@
+From 74d35517a3b404ffa86c0a0e49d63e1b20207110 Mon Sep 17 00:00:00 2001
+From: Marc K <morckx@gmail.com>
+Date: Fri, 24 Apr 2020 13:37:14 +0200
+Subject: [PATCH 06/12] Fix preview tile in grid option picker
+
+Create GridTileDrawable with cols and rows parameters in correct order
+and display also non quadratic configurations correctly.
+
+Change-Id: I6bb64564e86ec002831dc04bf95f51318dc9e6b3
+---
+ .../customization/model/grid/GridOption.java    |  2 +-
+ .../customization/widget/GridTileDrawable.java  | 17 ++++++++++++-----
+ 2 files changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/src/com/android/customization/model/grid/GridOption.java b/src/com/android/customization/model/grid/GridOption.java
+index 43afee4..b62a4ee 100644
+--- a/src/com/android/customization/model/grid/GridOption.java
++++ b/src/com/android/customization/model/grid/GridOption.java
+@@ -62,7 +62,7 @@ public class GridOption implements CustomizationOption<GridOption>, Parcelable {
+         mTitle = title;
+         mIsCurrent = isCurrent;
+         mIconShapePath = iconShapePath;
+-        mTileDrawable = new GridTileDrawable(rows, cols, mIconShapePath);
++        mTileDrawable = new GridTileDrawable(cols, rows, iconShapePath);
+         this.name = name;
+         this.rows = rows;
+         this.cols = cols;
+diff --git a/src/com/android/customization/widget/GridTileDrawable.java b/src/com/android/customization/widget/GridTileDrawable.java
+index c746aaf..6d58503 100644
+--- a/src/com/android/customization/widget/GridTileDrawable.java
++++ b/src/com/android/customization/widget/GridTileDrawable.java
+@@ -28,7 +28,8 @@ public class GridTileDrawable extends Drawable {
+     private final Path mTransformedPath;
+     private final Matrix mScaleMatrix;
+     private float mCellSize = -1f;
+-    private float mSpaceBetweenIcons;
++    private float mMarginTop;
++    private float mMarginLeft;
+ 
+     public GridTileDrawable(int cols, int rows, String path) {
+         mCols = cols;
+@@ -41,9 +42,15 @@ public class GridTileDrawable extends Drawable {
+ 
+     @Override
+     protected void onBoundsChange(Rect bounds) {
++        float spaceBetweenIcons;
++
+         super.onBoundsChange(bounds);
+-        mCellSize = (float) bounds.height() / mRows;
+-        mSpaceBetweenIcons = mCellSize * ((1 - ICON_SCALE) / 2);
++        mCellSize = Math.min((float) bounds.height() / mRows,  (float) bounds.width() / mCols);
++
++        spaceBetweenIcons = mCellSize * ((1 - ICON_SCALE) / 2);
++        mMarginTop = (bounds.height() - mCellSize * mRows) / 2 + spaceBetweenIcons;
++        mMarginLeft = (bounds.width() - mCellSize * mCols) / 2 + spaceBetweenIcons;
++
+ 
+         float scaleFactor = (mCellSize * ICON_SCALE) / PATH_SIZE;
+         mScaleMatrix.setScale(scaleFactor, scaleFactor);
+@@ -55,8 +62,8 @@ public class GridTileDrawable extends Drawable {
+         for (int r = 0; r < mRows; r++) {
+             for (int c = 0; c < mCols; c++) {
+                 int saveCount = canvas.save();
+-                float x = (c * mCellSize) + mSpaceBetweenIcons;
+-                float y = (r * mCellSize) + mSpaceBetweenIcons;
++                float x = (c * mCellSize) + mMarginLeft;
++                float y = (r * mCellSize) + mMarginTop;
+                 canvas.translate(x, y);
+                 canvas.drawPath(mTransformedPath, mPaint);
+                 canvas.restoreToCount(saveCount);
+-- 
+2.34.1
+

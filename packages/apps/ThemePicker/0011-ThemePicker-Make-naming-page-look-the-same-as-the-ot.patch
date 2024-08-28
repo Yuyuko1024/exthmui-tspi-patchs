@@ -1,0 +1,55 @@
+From 553f767548604586167a6c97dd599324322d3d8d Mon Sep 17 00:00:00 2001
+From: Michael W <baddaemon87@gmail.com>
+Date: Sun, 3 Jan 2021 16:39:35 +0100
+Subject: [PATCH 11/12] ThemePicker: Make naming page look the same as the
+ other ones
+
+* All pages use colorPrimary as a background for the preview
+* Also the page is missing the divider line, so add it
+
+Change-Id: I22fb7e03af62b5e374b8aa6b81803f3229482e29
+---
+ res/layout/fragment_custom_theme_name.xml | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/res/layout/fragment_custom_theme_name.xml b/res/layout/fragment_custom_theme_name.xml
+index 28dffd3..ba567cd 100644
+--- a/res/layout/fragment_custom_theme_name.xml
++++ b/res/layout/fragment_custom_theme_name.xml
+@@ -34,7 +34,7 @@
+             android:paddingTop="@dimen/preview_content_padding_top"
+             android:paddingBottom="@dimen/preview_content_padding_bottom"
+             android:clipToPadding="false"
+-            android:background="@color/fullscreen_preview_background"
++            android:background="?android:colorPrimary"
+             app:layout_constrainedHeight="true"
+             app:layout_constraintBottom_toTopOf="@+id/component_scroll_view"
+             app:layout_constraintEnd_toEndOf="parent"
+@@ -47,13 +47,23 @@
+             <include layout="@layout/theme_preview_card"/>
+         </FrameLayout>
+ 
++        <View
++            android:id="@+id/divider"
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:background="@color/divider_color"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/component_preview_container"
++            app:layout_constraintBottom_toTopOf="@+id/component_scroll_view"/>
++
+         <ScrollView
+                 android:id="@+id/component_scroll_view"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+-                app:layout_constraintTop_toBottomOf="@+id/component_preview_container"
++                app:layout_constraintTop_toBottomOf="@+id/divider"
+                 app:layout_constraintBottom_toBottomOf="parent">
+ 
+             <LinearLayout
+-- 
+2.34.1
+

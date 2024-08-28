@@ -1,0 +1,27 @@
+From 43270e9d70f3561187bb4c900cef82c18fed5052 Mon Sep 17 00:00:00 2001
+From: Luca Stefani <luca.stefani.ge1@gmail.com>
+Date: Fri, 1 Nov 2019 23:17:08 +0100
+Subject: [PATCH 03/12] Specify we read and write launcher settings
+
+Change-Id: Ifc8196588443b007602118389ca76d34ab531f14
+---
+ AndroidManifest.xml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 1bcacab..6ef8930 100755
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -10,6 +10,9 @@
+     <uses-permission android:name="android.permission.SET_WALLPAPER_COMPONENT" />
+     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+ 
++    <uses-permission android:name="com.android.launcher3.permission.READ_SETTINGS" />
++    <uses-permission android:name="com.android.launcher3.permission.WRITE_SETTINGS" />
++
+     <application
+         tools:replace="android:icon,android:name"
+         android:extractNativeLibs="false"
+-- 
+2.34.1
+

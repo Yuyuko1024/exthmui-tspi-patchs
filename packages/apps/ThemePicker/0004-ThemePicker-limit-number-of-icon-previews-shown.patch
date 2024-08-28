@@ -1,0 +1,37 @@
+From f21ef0f501a25389a100483199b30337dc05d6bb Mon Sep 17 00:00:00 2001
+From: Demon000 <demonsingur@gmail.com>
+Date: Wed, 20 Nov 2019 19:35:20 +0100
+Subject: [PATCH 04/12] ThemePicker: limit number of icon previews shown
+
+Change-Id: I8a1506fd0e8cddbaf4d6df28b75045c2e7801a81
+---
+ .../model/theme/custom/ShapeOptionsProvider.java            | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/com/android/customization/model/theme/custom/ShapeOptionsProvider.java b/src/com/android/customization/model/theme/custom/ShapeOptionsProvider.java
+index f93b892..633c1f5 100644
+--- a/src/com/android/customization/model/theme/custom/ShapeOptionsProvider.java
++++ b/src/com/android/customization/model/theme/custom/ShapeOptionsProvider.java
+@@ -55,6 +55,8 @@ import java.util.List;
+ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOption> {
+ 
+     private static final String TAG = "ShapeOptionsProvider";
++    private static final int MAX_ICON_SHAPE_PREVIEWS = 6;
++
+     private final String[] mShapePreviewIconPackages;
+     private int mThumbSize;
+ 
+@@ -106,6 +108,10 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
+     private List<ShapeAppIcon> getShapedAppIcons(Path path) {
+         List<ShapeAppIcon> shapedAppIcons = new ArrayList<>();
+         for (String packageName : mShapePreviewIconPackages) {
++            if (shapedAppIcons.size() == MAX_ICON_SHAPE_PREVIEWS) {
++                break;
++            }
++
+             Drawable icon = null;
+             CharSequence name = null;
+             try {
+-- 
+2.34.1
+

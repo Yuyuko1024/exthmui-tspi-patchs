@@ -1,0 +1,29 @@
+From 26f6fe84118d1771822ddc960ea9006637b1e87a Mon Sep 17 00:00:00 2001
+From: Danny Lin <danny@kdrag0n.dev>
+Date: Tue, 3 Nov 2020 22:33:25 -0800
+Subject: [PATCH 09/12] ThemePicker: Use title capitalization for style name
+ field
+
+This is a title, so it should be using title-case (or sentence case, as
+suggested by the Material text guidelines) instead of no capitalization.
+
+Change-Id: Iceb341d0fff9658d860ce3d6f2eef9a21894c858
+---
+ res/layout/fragment_custom_theme_name.xml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/res/layout/fragment_custom_theme_name.xml b/res/layout/fragment_custom_theme_name.xml
+index 532e904..28dffd3 100644
+--- a/res/layout/fragment_custom_theme_name.xml
++++ b/res/layout/fragment_custom_theme_name.xml
+@@ -80,6 +80,7 @@
+                         android:layout_gravity="center|top"
+                         android:importantForAutofill="no"
+                         android:minWidth="300dp"
++                        android:inputType="textCapWords"
+                         style="@style/CustomThemeNameEditText"/>
+             </LinearLayout>
+         </ScrollView>
+-- 
+2.34.1
+

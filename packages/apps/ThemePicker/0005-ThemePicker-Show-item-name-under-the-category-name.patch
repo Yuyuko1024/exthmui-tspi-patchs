@@ -1,0 +1,73 @@
+From 7503b52a958a2e3bc8800606fa3ff91f0b38fa56 Mon Sep 17 00:00:00 2001
+From: El Dainosor <eldainosor@gmail.com>
+Date: Mon, 9 Dec 2019 07:13:33 +0100
+Subject: [PATCH 05/12] ThemePicker: Show item name under the category name
+
+When selecting an option, the name will show up for the
+respective font, icon, accent colour or shape.
+
+Change-Id: I834dbf30301dba47b1a7e850940af32e92c14b2d
+---
+ res/layout/theme_component_preview.xml               |  1 +
+ .../model/theme/custom/ThemeComponentOption.java     | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/res/layout/theme_component_preview.xml b/res/layout/theme_component_preview.xml
+index bf3255d..fc3e474 100644
+--- a/res/layout/theme_component_preview.xml
++++ b/res/layout/theme_component_preview.xml
+@@ -48,6 +48,7 @@
+             android:layout_gravity="center_horizontal"
+             android:drawablePadding="@dimen/theme_preview_header_drawable_padding"
+             android:textAppearance="@style/CardTitleTextAppearance"
++            android:gravity="center_horizontal"
+             android:importantForAccessibility="no"
+             app:layout_constraintBottom_toTopOf="@id/theme_preview_card_body_container"
+             app:layout_constraintEnd_toEndOf="parent"
+diff --git a/src/com/android/customization/model/theme/custom/ThemeComponentOption.java b/src/com/android/customization/model/theme/custom/ThemeComponentOption.java
+index 5922f5c..327ff65 100644
+--- a/src/com/android/customization/model/theme/custom/ThemeComponentOption.java
++++ b/src/com/android/customization/model/theme/custom/ThemeComponentOption.java
+@@ -151,6 +151,9 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
+             }
+             TextView title = container.findViewById(R.id.font_card_title);
+             title.setTypeface(mHeadlineFont);
++            TextView header = container.findViewById(R.id.theme_preview_card_header);
++            header.setText(String.format("%s\n(%s)",
++                    container.getContext().getString(R.string.preview_name_font), mLabel));
+             TextView bodyText = container.findViewById(R.id.font_card_body);
+             bodyText.setTypeface(mBodyFont);
+             container.findViewById(R.id.font_card_divider).setBackgroundColor(
+@@ -233,6 +236,9 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
+ 
+             bindPreviewHeader(container, R.string.preview_name_icon, R.drawable.ic_wifi_24px);
+ 
++            TextView header = container.findViewById(R.id.theme_preview_card_header);
++            header.setText(String.format("%s\n(%s)",
++                    container.getContext().getString(R.string.preview_name_icon), mLabel));
+             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+             if (cardBody.getChildCount() == 0) {
+                 LayoutInflater.from(container.getContext()).inflate(
+@@ -366,6 +372,9 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
+ 
+             bindPreviewHeader(container, R.string.preview_name_color, R.drawable.ic_colorize_24px);
+ 
++            TextView header = container.findViewById(R.id.theme_preview_card_header);
++            header.setText(String.format("%s\n(%s)",
++                    container.getContext().getString(R.string.preview_name_color), mLabel));
+             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+             if (cardBody.getChildCount() == 0) {
+                 LayoutInflater.from(container.getContext()).inflate(
+@@ -509,6 +518,9 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
+ 
+             bindPreviewHeader(container, R.string.preview_name_shape, R.drawable.ic_shapes_24px);
+ 
++            TextView header = container.findViewById(R.id.theme_preview_card_header);
++            header.setText(String.format("%s\n(%s)",
++                    container.getContext().getString(R.string.preview_name_shape), mLabel));
+             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+             if (cardBody.getChildCount() == 0) {
+                 LayoutInflater.from(container.getContext()).inflate(
+-- 
+2.34.1
+

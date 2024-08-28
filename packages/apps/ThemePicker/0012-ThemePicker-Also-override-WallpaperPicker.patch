@@ -1,0 +1,25 @@
+From 6062596c939c116284ae169d82ee5c4a163af558 Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Sun, 28 Apr 2024 19:26:53 +0800
+Subject: [PATCH 12/12] ThemePicker: Also override WallpaperPicker
+
+---
+ Android.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Android.mk b/Android.mk
+index 5a443d2..dbc8a4d 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -32,7 +32,7 @@ LOCAL_PROGUARD_ENABLED := disabled
+ LOCAL_PACKAGE_NAME := ThemePicker
+ LOCAL_PRIVILEGED_MODULE := true
+ LOCAL_SYSTEM_EXT_MODULE := true
+-LOCAL_OVERRIDES_PACKAGES := WallpaperPicker2
++LOCAL_OVERRIDES_PACKAGES := WallpaperPicker2 WallpaperPicker
+ 
+ ifneq (,$(wildcard frameworks/base))
+   LOCAL_PRIVATE_PLATFORM_APIS := true
+-- 
+2.34.1
+

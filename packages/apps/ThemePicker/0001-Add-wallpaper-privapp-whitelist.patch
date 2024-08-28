@@ -1,0 +1,67 @@
+From 7d489615e3acd20fe40ce5b64fa9c48398cf1f1b Mon Sep 17 00:00:00 2001
+From: Luca Stefani <luca.stefani.ge1@gmail.com>
+Date: Fri, 1 Nov 2019 21:14:29 +0100
+Subject: [PATCH 01/12] Add wallpaper privapp whitelist
+
+Change-Id: I044b1d9201ac0b8780fc37a387f401f3dd0ddeac
+---
+ Android.mk                                  | 10 +++++++++
+ privapp_whitelist_com.android.wallpaper.xml | 23 +++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
+ create mode 100644 privapp_whitelist_com.android.wallpaper.xml
+
+diff --git a/Android.mk b/Android.mk
+index 987c875..e83f71d 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -49,8 +49,18 @@ LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
+ 
+ LOCAL_MANIFEST_FILE := AndroidManifest.xml
+ 
++LOCAL_REQUIRED_MODULES := privapp_whitelist_com.android.wallpaper.xml
++
+ include $(BUILD_PACKAGE)
+ 
++include $(CLEAR_VARS)
++LOCAL_MODULE := privapp_whitelist_com.android.wallpaper.xml
++LOCAL_MODULE_CLASS := ETC
++LOCAL_MODULE_TAGS := optional
++LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_EXT_ETC)/permissions
++LOCAL_SYSTEM_EXT_MODULE := true
++LOCAL_SRC_FILES := $(LOCAL_MODULE)
++include $(BUILD_PREBUILT)
+ 
+ # ==================================================
+ include $(call all-makefiles-under,$(LOCAL_PATH))
+diff --git a/privapp_whitelist_com.android.wallpaper.xml b/privapp_whitelist_com.android.wallpaper.xml
+new file mode 100644
+index 0000000..a61cd41
+--- /dev/null
++++ b/privapp_whitelist_com.android.wallpaper.xml
+@@ -0,0 +1,23 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++  ~ Copyright (C) 2019 The Android Open Source Project
++  ~
++  ~ Licensed under the Apache License, Version 2.0 (the "License");
++  ~ you may not use this file except in compliance with the License.
++  ~ You may obtain a copy of the License at
++  ~
++  ~      http://www.apache.org/licenses/LICENSE-2.0
++  ~
++  ~ Unless required by applicable law or agreed to in writing, software
++  ~ distributed under the License is distributed on an "AS IS" BASIS,
++  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++  ~ See the License for the specific language governing permissions and
++  ~ limitations under the License
++  -->
++<permissions>
++    <privapp-permissions package="com.android.wallpaper">
++        <permission name="android.permission.CHANGE_OVERLAY_PACKAGES"/>
++        <permission name="android.permission.SET_WALLPAPER_COMPONENT"/>
++        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
++    </privapp-permissions>
++</permissions>
+-- 
+2.34.1
+

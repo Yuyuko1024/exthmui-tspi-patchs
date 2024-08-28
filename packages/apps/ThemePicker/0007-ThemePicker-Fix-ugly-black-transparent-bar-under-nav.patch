@@ -1,0 +1,42 @@
+From 2fb42fbe8c30bf64743d71ccdff40441269d98ad Mon Sep 17 00:00:00 2001
+From: LuK1337 <priv.luk@gmail.com>
+Date: Tue, 15 Sep 2020 12:04:54 +0200
+Subject: [PATCH 07/12] ThemePicker: Fix ugly black/transparent bar under nav
+ area
+
+Change-Id: I4ba6407ff0f775ac8f694db15b4bd5c2571bdc27
+---
+ AndroidManifest.xml   | 2 +-
+ res/values/styles.xml | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 6ef8930..3bbdc22 100755
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -28,7 +28,7 @@
+             android:name="com.android.customization.picker.CustomizationPickerActivity"
+             android:label="@string/app_name"
+             android:resizeableActivity="false"
+-            android:theme="@style/CustomizationTheme.NoActionBar">
++            android:theme="@style/CustomizationTheme.NoActionBar.CustomizationPicker">
+             <intent-filter>
+                 <action android:name="android.intent.action.SET_WALLPAPER"/>
+ 
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index b4e1971..0948012 100644
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -38,7 +38,9 @@
+         <item name="android:windowNoTitle">true</item>
+         <item name="android:fitsSystemWindows">false</item>
+         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
++    </style>
+ 
++    <style name="CustomizationTheme.NoActionBar.CustomizationPicker" parent="CustomizationTheme.NoActionBar">
+         <item name="android:windowBackground">@android:color/transparent</item>
+         <item name="android:windowContentOverlay">@null</item>
+         <item name="android:windowDisablePreview">true</item>
+-- 
+2.34.1
+

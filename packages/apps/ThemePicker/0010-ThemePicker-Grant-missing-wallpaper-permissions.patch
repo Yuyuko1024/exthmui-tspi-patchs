@@ -1,0 +1,31 @@
+From e38f3ff44c4e2658f65f5fee2035c39a3fe99192 Mon Sep 17 00:00:00 2001
+From: Danny Lin <danny@kdrag0n.dev>
+Date: Wed, 4 Nov 2020 01:27:52 -0800
+Subject: [PATCH 10/12] ThemePicker: Grant missing wallpaper permissions
+
+Some wallpaper-related permissions necessary for launcher previews (and
+possibly some other functionality) are missing here. Grant the missing
+permissions to fix launcher preview rendering.
+
+Change-Id: I177b0a6e58ffc50d0c3fa76a0137d3bdb7d63d11
+---
+ privapp_whitelist_com.android.wallpaper.xml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/privapp_whitelist_com.android.wallpaper.xml b/privapp_whitelist_com.android.wallpaper.xml
+index a61cd41..abcec3d 100644
+--- a/privapp_whitelist_com.android.wallpaper.xml
++++ b/privapp_whitelist_com.android.wallpaper.xml
+@@ -16,7 +16,9 @@
+   -->
+ <permissions>
+     <privapp-permissions package="com.android.wallpaper">
++        <permission name="android.permission.BIND_WALLPAPER"/>
+         <permission name="android.permission.CHANGE_OVERLAY_PACKAGES"/>
++        <permission name="android.permission.READ_WALLPAPER_INTERNAL"/>
+         <permission name="android.permission.SET_WALLPAPER_COMPONENT"/>
+         <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+     </privapp-permissions>
+-- 
+2.34.1
+
