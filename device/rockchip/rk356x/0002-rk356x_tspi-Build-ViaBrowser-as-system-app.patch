@@ -1,7 +1,7 @@
 From 558a3e8c16bf075bb5f125500174a0528908bab1 Mon Sep 17 00:00:00 2001
 From: Yuyuko1024 <dingwenxuan4@gmail.com>
 Date: Thu, 1 Aug 2024 20:34:15 +0800
-Subject: [PATCH 2/7] rk356x_tspi: Build ViaBrowser as system app
+Subject: [PATCH 2/9] rk356x_tspi: Build ViaBrowser as system app
 
 Change-Id: Icecbb5cea8500dacb9223725d21a419a19c8419a
 ---

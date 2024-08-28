@@ -1,7 +1,7 @@
 From 0d2a455b286d0db6eda42b56c3680e4107dcb6be Mon Sep 17 00:00:00 2001
 From: Yuyuko1024 <dingwenxuan4@gmail.com>
 Date: Fri, 2 Aug 2024 10:58:51 +0800
-Subject: [PATCH 4/7] Exclude QuickSearchBox for tspi
+Subject: [PATCH 4/9] Exclude QuickSearchBox for tspi
 
 Change-Id: I630731904818e47e7c6f97c0c073f6be4d8535bc
 ---
