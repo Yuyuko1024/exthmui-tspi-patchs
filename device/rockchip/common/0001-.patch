@@ -1,4 +1,4 @@
-From eaa4eb24e70d65765b4d9526fe667c5725cd45ab Mon Sep 17 00:00:00 2001
+From 0a547bc45900e888ed978ac2f4ecd703d7ba02da Mon Sep 17 00:00:00 2001
 From: YouMeng <36076779@qq.com>
 Date: Wed, 21 Aug 2024 22:40:21 +0800
 Subject: [PATCH] =?UTF-8?q?=E6=B7=BB=E5=8A=A0=E4=BC=A0=E6=84=9F=E5=99=A8?=
@@ -37,5 +37,5 @@ index 6a09ee3..f278926 100755
  # readahead files to improve boot time
  # BOARD_BOOT_READAHEAD ?= true
 -- 
-2.34.1
+2.17.1
 

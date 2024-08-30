@@ -1,0 +1,25 @@
+From ac4f8599f0409c9b3c8f240d837e740c4891fb15 Mon Sep 17 00:00:00 2001
+From: Yuyuko1024 <dingwenxuan4@gmail.com>
+Date: Thu, 1 Aug 2024 20:34:15 +0800
+Subject: [PATCH 03/10] rk356x_tspi: Build ViaBrowser as system app
+
+Change-Id: Icecbb5cea8500dacb9223725d21a419a19c8419a
+---
+ rk3566_tspi/rk3566_tspi.mk | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/rk3566_tspi/rk3566_tspi.mk b/rk3566_tspi/rk3566_tspi.mk
+index 1d2f585..caec105 100755
+--- a/rk3566_tspi/rk3566_tspi.mk
++++ b/rk3566_tspi/rk3566_tspi.mk
+@@ -46,3 +46,7 @@ PRODUCT_PROPERTY_OVERRIDES += persist.wifi.sleep.delay.ms=0
+ PRODUCT_PROPERTY_OVERRIDES += persist.bt.power.down=true
+ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.hdmirotationlock=true
+ PRODUCT_PROPERTY_OVERRIDES += persist.sys.timezone=Asia/Shanghai
++
++# Prebuilts system apk
++PRODUCT_PACKAGES += \
++	ViaBrowser
+-- 
+2.34.1
+

@@ -1,4 +1,4 @@
-From 6031a3153a092d84ad2319f6a3b8831b1ae7de95 Mon Sep 17 00:00:00 2001
+From 2e03428b2dbb1c59f0679645e68a101deb1b111b Mon Sep 17 00:00:00 2001
 From: YouMeng <36076779@qq.com>
 Date: Wed, 21 Aug 2024 22:36:18 +0800
 Subject: [PATCH] =?UTF-8?q?=E6=B7=BB=E5=8A=A0EC20=20GNSS?=
@@ -5032,5 +5032,5 @@ index 301d1816d..6feed4421
 +    return defaultPassthroughServiceImplementation<IGnss>();
  }
 -- 
-2.34.1
+2.17.1
 
